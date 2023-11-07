@@ -9,17 +9,17 @@ class Gitfs < Formula
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "498125aa1ac9967e1d445ed74f974eba62c138edbee9fb2bbb4862d6f8cd8381"
+    if Hardware::CPU.arm?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
+      sha256 "50bd8e4ff481c17322c548a15634a0c1a0572c85ebe36e8ac4147b57340ba7f0"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
-      sha256 "219d784ff26110eb61cc065fa21dca0eeb65ebb4639f15f74fb7c62b83529212"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
+      sha256 "e2cff39b2484c9738c41966f36bc9714a2c4e3f01d78baed70d97f5dbce54218"
 
       def install
         bin.install "gitfs"
@@ -28,17 +28,17 @@ class Gitfs < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
-      sha256 "49a462aaf27f5596fbd02fb05d37ad7785faa386a5fece689912cd0527ee03f1"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
+      sha256 "03d2dc2efe1fa9e0213b357576cc6f7ff623bf72514d3f60af17eabc4b550ce9"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
-      sha256 "b2c66a60136c0f4d368205b3ee2c39a3f43d879b6703ad66183bf563188df6d0"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "42d7077649c0ec0571e4037ff0aa4da728330ee1fc364b556c48422cf5ebea9f"
 
       def install
         bin.install "gitfs"
@@ -46,8 +46,24 @@ class Gitfs < Formula
     end
   end
 
-  depends_on cask: "osxfuse" if OS.mac?
+  class MacFuseRequirement < Requirement
+    fatal true
+
+    satisfy(build_env: false) do
+      File.exist?("/usr/local/include/fuse/fuse.h") &&
+        !File.symlink?("/usr/local/include/fuse")
+    end
+
+    def message
+      <<~EOS
+        macFUSE is required; install it via:
+        brew install --cask macfuse
+      EOS
+    end
+  end
+
   depends_on "libfuse" if OS.linux?
+  depends_on MacFuseRequirement if OS.mac?
 
   test do
     system "#{bin}/gitfs", "version"
