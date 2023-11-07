@@ -9,17 +9,17 @@ class Gitfs < Formula
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
-      sha256 "21f4096a303256faa5e098abb53f846e29c409a4b869d8d01e504ea13cc04757"
-
-      def install
-        bin.install "gitfs"
-      end
-    end
     if Hardware::CPU.intel?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "158690bc8b99633143f3fa85a061faad190a5e943653c3dea66226649121fdf1"
+      sha256 "2eeb0610836432ba15b14c4269fd4fe19f7cd4032070004f5e0e435d630dc9ca"
+
+      def install
+        bin.install "gitfs"
+      end
+    end
+    if Hardware::CPU.arm?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
+      sha256 "f92b008b55cf7c7bb7126c75822e500e4a8509a111322958422b3e6252f7fcc7"
 
       def install
         bin.install "gitfs"
@@ -28,17 +28,17 @@ class Gitfs < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
-      sha256 "04bce4343dfca5b399da4e17e48985bb9db7b954492a58d4b6099ca9b9cb63b7"
-
-      def install
-        bin.install "gitfs"
-      end
-    end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
-      sha256 "e85b20b9689af47bdba57f6bbb456f051989ad00ab74ab6017ea1f674e038078"
+      sha256 "69b83d440f62d8295bee93e62048d9cb8b9bb5e9ccde9cce953ae0eab51bc0d4"
+
+      def install
+        bin.install "gitfs"
+      end
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "983905203bffb7ac4bbc6ef30f31a482fe5f168e66bbd936198ca5b65e825f81"
 
       def install
         bin.install "gitfs"
@@ -46,12 +46,8 @@ class Gitfs < Formula
     end
   end
 
-  on_macos do
-    depends_on cask: "osxfuse"
-  end
-  on_linux do
-    depends_on "libfuse-dev"
-  end
+  depends_on "libfuse-dev" if OS.linux?
+  depends_on cask: "osxfuse" if OS.mac?
 
   test do
     system "#{bin}/gitfs", "version"
