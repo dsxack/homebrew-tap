@@ -11,7 +11,7 @@ class Gitfs < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "2eeb0610836432ba15b14c4269fd4fe19f7cd4032070004f5e0e435d630dc9ca"
+      sha256 "f3d9eb54220f7b53a1a54f6c97111e1d36faf5f164fbdd96b375d539ac2e5c45"
 
       def install
         bin.install "gitfs"
@@ -19,7 +19,7 @@ class Gitfs < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
-      sha256 "f92b008b55cf7c7bb7126c75822e500e4a8509a111322958422b3e6252f7fcc7"
+      sha256 "a14981138a71f29ef004a9a4acf63889f2176b8047bb0c3f07b8ad46a1328b74"
 
       def install
         bin.install "gitfs"
@@ -30,7 +30,7 @@ class Gitfs < Formula
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
-      sha256 "69b83d440f62d8295bee93e62048d9cb8b9bb5e9ccde9cce953ae0eab51bc0d4"
+      sha256 "98ffa80802161ce88fa6b95917e00910d464aab885976e1523e1a76fa24cce17"
 
       def install
         bin.install "gitfs"
@@ -38,7 +38,7 @@ class Gitfs < Formula
     end
     if Hardware::CPU.intel?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
-      sha256 "983905203bffb7ac4bbc6ef30f31a482fe5f168e66bbd936198ca5b65e825f81"
+      sha256 "5a204d485ad1aab2af036e9a46ad7282d73913c0ea0b423bdcbe86079ed4d4e0"
 
       def install
         bin.install "gitfs"
@@ -46,8 +46,8 @@ class Gitfs < Formula
     end
   end
 
-  depends_on "libfuse-dev" if OS.linux?
   depends_on cask: "osxfuse" if OS.mac?
+  depends_on "libfuse-dev" if OS.linux?
 
   test do
     system "#{bin}/gitfs", "version"
