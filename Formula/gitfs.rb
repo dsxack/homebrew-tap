@@ -11,7 +11,7 @@ class Gitfs < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "f3d9eb54220f7b53a1a54f6c97111e1d36faf5f164fbdd96b375d539ac2e5c45"
+      sha256 "498125aa1ac9967e1d445ed74f974eba62c138edbee9fb2bbb4862d6f8cd8381"
 
       def install
         bin.install "gitfs"
@@ -19,7 +19,7 @@ class Gitfs < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
-      sha256 "a14981138a71f29ef004a9a4acf63889f2176b8047bb0c3f07b8ad46a1328b74"
+      sha256 "219d784ff26110eb61cc065fa21dca0eeb65ebb4639f15f74fb7c62b83529212"
 
       def install
         bin.install "gitfs"
@@ -28,17 +28,17 @@ class Gitfs < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
-      sha256 "98ffa80802161ce88fa6b95917e00910d464aab885976e1523e1a76fa24cce17"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "49a462aaf27f5596fbd02fb05d37ad7785faa386a5fece689912cd0527ee03f1"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
-      sha256 "5a204d485ad1aab2af036e9a46ad7282d73913c0ea0b423bdcbe86079ed4d4e0"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
+      sha256 "b2c66a60136c0f4d368205b3ee2c39a3f43d879b6703ad66183bf563188df6d0"
 
       def install
         bin.install "gitfs"
@@ -47,7 +47,7 @@ class Gitfs < Formula
   end
 
   depends_on cask: "osxfuse" if OS.mac?
-  depends_on "libfuse-dev" if OS.linux?
+  depends_on "libfuse" if OS.linux?
 
   test do
     system "#{bin}/gitfs", "version"
