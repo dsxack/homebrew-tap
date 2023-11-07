@@ -5,21 +5,21 @@
 class Gitfs < Formula
   desc "FUSE filesystem for browsing contents of git repositories revisions"
   homepage "https://github.com/dsxack/gitfs"
-  version "1.4.4"
+  version "1.4.5"
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "1c4db2a7482cd278a3f1b6c13b991a477c318cc9ff7e65968802066c2b687acd"
+    if Hardware::CPU.arm?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
+      sha256 "011a434f40dc5fb89a0be69b51ec8b797d3682727b15c1eb3ead0f3efcdbcccb"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Darwin_arm64.tar.gz"
-      sha256 "6da2516ce4e00c7c4da21a9a464f6d423212759bc8fba7347d2b4d78f8e8bca7"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
+      sha256 "9a3967ed5a063b61815baca81aca4235988bc507c37549469e23f46dfe7a08bc"
 
       def install
         bin.install "gitfs"
@@ -28,22 +28,29 @@ class Gitfs < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Linux_arm64.tar.gz"
-      sha256 "d477dce1c1142d4a83983e72a59a0a4e46947c12b0d5cdafcb6204a12f235f50"
-
-      def install
-        bin.install "gitfs"
-      end
-    end
     if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Linux_x86_64.tar.gz"
-      sha256 "bddb134c2d72ee79dc8d0b42f47d4c937b14b908c17a98b0f9e9bf5bd16aa3fe"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "06f5e981e2a23ead359db2a878e43822946ab76ba2aaa70fed38507f96aa0af9"
 
       def install
         bin.install "gitfs"
       end
     end
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
+      sha256 "cd365217a557d82662d4753727babd7385e77ae3e9390e137fb45bbce54dcfba"
+
+      def install
+        bin.install "gitfs"
+      end
+    end
+  end
+
+  on_macos do
+    depends_on: cask: "osxfuse"
+  end
+  on_linux do
+    depends_on: "libfuse-dev"
   end
 
   test do
