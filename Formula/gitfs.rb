@@ -9,17 +9,17 @@ class Gitfs < Formula
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "74272038f13ab262937297ded1f2e501e235f440fbe73b56c920afe44a839851"
+    if Hardware::CPU.arm?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
+      sha256 "21f4096a303256faa5e098abb53f846e29c409a4b869d8d01e504ea13cc04757"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
-      sha256 "2a99f1a1b7cf13db85c450783ac74b1e8fcf97ef60c7f75ff625eaa0237da95d"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
+      sha256 "158690bc8b99633143f3fa85a061faad190a5e943653c3dea66226649121fdf1"
 
       def install
         bin.install "gitfs"
@@ -28,17 +28,17 @@ class Gitfs < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
-      sha256 "da58184a4e338de6d1897524b0f25955b460f9fb4726669af8871d604bf436b8"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "04bce4343dfca5b399da4e17e48985bb9db7b954492a58d4b6099ca9b9cb63b7"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
-      sha256 "ed452a50dcec5c7ed934920ca49558d2d60e9a9dc5c02152b5428f589de7d43f"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
+      sha256 "e85b20b9689af47bdba57f6bbb456f051989ad00ab74ab6017ea1f674e038078"
 
       def install
         bin.install "gitfs"
@@ -50,7 +50,7 @@ class Gitfs < Formula
     depends_on cask: "osxfuse"
   end
   on_linux do
-    depends_on: "libfuse-dev"
+    depends_on "libfuse-dev"
   end
 
   test do
