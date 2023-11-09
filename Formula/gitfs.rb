@@ -5,21 +5,21 @@
 class Gitfs < Formula
   desc "FUSE filesystem for browsing contents of git repositories revisions"
   homepage "https://github.com/dsxack/gitfs"
-  version "1.4.4"
+  version "1.4.5"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "ccb3c08c69761f28f92d56830c073139d20845a039ae93bdf01379e161077f6d"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_x86_64.tar.gz"
+      sha256 "5ea30df9629e7e592b90be128e728863cf811f16aaffafc2f949a3752617948a"
 
       def install
         bin.install "gitfs"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Darwin_arm64.tar.gz"
-      sha256 "43eab52bf1c51164e58baee581c86bac03103a9cfbbd8fdfb8387967bfbf4013"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Darwin_arm64.tar.gz"
+      sha256 "ed257549a2bf203cf64e5379882cc3d70efc889ecb9a8aed2c5760c30ae4e229"
 
       def install
         bin.install "gitfs"
@@ -29,16 +29,16 @@ class Gitfs < Formula
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Linux_x86_64.tar.gz"
-      sha256 "65d6c21d80cf6d27d265e977cc8a7f1bd000444249ee1610e455e4e6ef24fb51"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_x86_64.tar.gz"
+      sha256 "bcfb161e9d5c58577ac072a0fcd3b2690ba16b87a64eea56099ec9ab1ae98be3"
 
       def install
         bin.install "gitfs"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.4/gitfs_Linux_arm64.tar.gz"
-      sha256 "e57f5e152a07b077e211887ab82581503a1355c8c030feb64e65b4fd55c8063d"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.5/gitfs_Linux_arm64.tar.gz"
+      sha256 "c8edb09e5a3b7a25ff80606eaf7366ef0db14c1efc49be99c114fc466c4a976c"
 
       def install
         bin.install "gitfs"
