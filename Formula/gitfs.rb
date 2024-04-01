@@ -5,21 +5,21 @@
 class Gitfs < Formula
   desc "FUSE filesystem for browsing contents of git repositories revisions"
   homepage "https://github.com/dsxack/gitfs"
-  version "1.4.6"
+  version "1.4.7"
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.6/gitfs_Darwin_arm64.tar.gz"
-      sha256 "c3b49ad7854493d993d08185e2bfda1a6f1390a445924ab2a2f9725cf3f3810e"
+    if Hardware::CPU.intel?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.7/gitfs_Darwin_x86_64.tar.gz"
+      sha256 "e44ebc4c24922210659c3b898f7f7ada5121db2ca7e77391021042425e1ff924"
 
       def install
         bin.install "gitfs"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.6/gitfs_Darwin_x86_64.tar.gz"
-      sha256 "e2fc470abcd4c31e7f9c71617b3b4ae9a1085238d9673e8857a0c16aa25ddd26"
+    if Hardware::CPU.arm?
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.7/gitfs_Darwin_arm64.tar.gz"
+      sha256 "3e9fa1bf47d06f0c550eb4f2c2ec30c5b0a8dd2433dc09cf73a078f15fec4664"
 
       def install
         bin.install "gitfs"
@@ -29,16 +29,16 @@ class Gitfs < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.6/gitfs_Linux_arm64.tar.gz"
-      sha256 "b9cf52d718bfff1e447e941f94c47d936dbe5ffdb26ddcae5b2ba38b915558c6"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.7/gitfs_Linux_arm64.tar.gz"
+      sha256 "e084fd5216a1b1b5b4c750dc5b3634dafddc2f80632cd2bd59ba75602c930a72"
 
       def install
         bin.install "gitfs"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/dsxack/gitfs/releases/download/v1.4.6/gitfs_Linux_x86_64.tar.gz"
-      sha256 "03f169361f32790b217be2331d5077189c23ecbe31e60e69af3c39872b6f7e5d"
+      url "https://github.com/dsxack/gitfs/releases/download/v1.4.7/gitfs_Linux_x86_64.tar.gz"
+      sha256 "0c74d8fa12548cece5b59b02ad815ac24d12a77432974c6a345cab81064e24cb"
 
       def install
         bin.install "gitfs"
