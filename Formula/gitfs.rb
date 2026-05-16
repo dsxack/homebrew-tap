@@ -12,18 +12,10 @@ class Gitfs < Formula
     on_intel do
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.8/gitfs_Darwin_x86_64.tar.gz"
       sha256 "645d524f5ae1cb4adb3fd18f8bc3f62a92392712c138e0a1fe427e91724e1978"
-
-      def install
-        bin.install "gitfs"
-      end
     end
     on_arm do
       url "https://github.com/dsxack/gitfs/releases/download/v1.4.8/gitfs_Darwin_arm64.tar.gz"
       sha256 "2e5f9c5c1bfc840c0797f0633b0018c25df8c5147ea56fbb8d2d249e8c6b476c"
-
-      def install
-        bin.install "gitfs"
-      end
     end
   end
 
@@ -32,20 +24,12 @@ class Gitfs < Formula
       if Hardware::CPU.is_64_bit?
         url "https://github.com/dsxack/gitfs/releases/download/v1.4.8/gitfs_Linux_x86_64.tar.gz"
         sha256 "77e94560c6d708c4e8b806085b2c7bab4de0f2ff046ca86352aa708a56b76ac3"
-
-        def install
-          bin.install "gitfs"
-        end
       end
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
         url "https://github.com/dsxack/gitfs/releases/download/v1.4.8/gitfs_Linux_arm64.tar.gz"
         sha256 "8228906e0a5d1f86561ffa3cb51811ac2c489235665a529a061fdc8f00888715"
-
-        def install
-          bin.install "gitfs"
-        end
       end
     end
   end
@@ -68,6 +52,10 @@ class Gitfs < Formula
 
   depends_on "libfuse" if OS.linux?
   depends_on MacFuseRequirement if OS.mac?
+
+  def install
+    bin.install "gitfs"
+  end
 
   test do
     system "#{bin}/gitfs", "version"

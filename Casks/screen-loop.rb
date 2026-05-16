@@ -11,11 +11,11 @@ cask "screen-loop" do
   desc "Menu bar screen recorder with a rolling buffer for saving recent history"
   homepage "https://github.com/dsxack/screen-loop"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "Screen Loop.app"
 
-  uninstall quit: "com.dsxack.screen-loop",
+  uninstall quit:       "com.dsxack.screen-loop",
             login_item: "Screen Loop"
 
   zap trash: [
